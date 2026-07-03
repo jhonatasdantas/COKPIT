@@ -14,6 +14,10 @@ dist/
 keys/
 .secrets/
 
+# CI temporariamente fora do versionamento (falta escopo `workflow` no token).
+# Readicionar quando houver token com escopo workflow.
+.github/workflows/
+
 # logs
 *.log
 npm-debug.log*
