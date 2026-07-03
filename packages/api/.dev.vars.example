@@ -1,0 +1,11 @@
+# Copie para `.dev.vars` (ignorado no git) para desenvolvimento local com `wrangler dev`.
+# Em produção, use: wrangler secret put <NOME>
+#
+# Fase 2+ (Auth Supabase):
+# SUPABASE_URL="https://<projeto>.supabase.co"
+# SUPABASE_JWT_SECRET="<jwt-secret-do-supabase>"
+# SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"   # só caminhos service-role (oauth_tokens)
+#
+# Fase 4+ (Shopee):
+# SHOPEE_PARTNER_ID="<partner-id>"
+# SHOPEE_PARTNER_KEY="<partner-key>"

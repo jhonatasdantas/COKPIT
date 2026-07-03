@@ -1,0 +1,28 @@
+name = "cockpit-api"
+main = "src/index.ts"
+compatibility_date = "2025-07-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Observabilidade nativa dos Workers (logs)
+[observability]
+enabled = true
+
+# Vars públicas (não-segredas). Segredos vão via `wrangler secret put` (ver .dev.vars.example).
+[vars]
+ENVIRONMENT = "development"
+
+# --- Bindings que entram nas próximas fases (deixados documentados, comentados) ---
+# Fase 2/3: Hyperdrive -> Supabase Postgres
+# [[hyperdrive]]
+# binding = "DB"
+# id = "<hyperdrive-id>"
+#
+# Fase 5: Durable Object por loja
+# [[durable_objects.bindings]]
+# name = "STORE"
+# class_name = "StoreDurableObject"
+#
+# Fase 6: Queue de sync (retry/backoff/DLQ)
+# [[queues.producers]]
+# binding = "SYNC_QUEUE"
+# queue = "cockpit-sync"
