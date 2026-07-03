@@ -1,12 +1,16 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { requireAuth, type AuthVars } from "./auth";
 
 export interface Env {
   ENVIRONMENT: string;
-  // Segredos (Fase 2+): SUPABASE_URL, SUPABASE_JWT_SECRET, etc. — via Workers Secrets.
+  // Fase 2 (Auth): segredo HS256 do Supabase para validar o JWT.
+  SUPABASE_JWT_SECRET?: string;
+  // Fase 2/3 (dados): connection string do Postgres (Supabase). Em prod via Hyperdrive.
+  DATABASE_URL?: string;
 }
 
-const app = new Hono<{ Bindings: Env }>();
+const app = new Hono<{ Bindings: Env; Variables: AuthVars }>();
 
 app.use("*", cors());
 
@@ -21,6 +25,17 @@ app.get("/health", (c) =>
 );
 
 app.get("/", (c) => c.text("cockpit-api"));
+
+// Rota protegida — exige JWT válido. Devolve a identidade resolvida do token.
+app.get("/me", requireAuth, (c) => {
+  const claims = c.get("claims");
+  return c.json({
+    user_id: claims.sub,
+    tenant_id: claims.tenant_id,
+    email: claims.email ?? null,
+    role: claims.role ?? null,
+  });
+});
 
 app.notFound((c) => c.json({ status: "not_found" }, 404));
 

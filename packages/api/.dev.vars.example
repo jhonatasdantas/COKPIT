@@ -3,8 +3,9 @@
 #
 # Fase 2+ (Auth Supabase):
 # SUPABASE_URL="https://<projeto>.supabase.co"
-# SUPABASE_JWT_SECRET="<jwt-secret-do-supabase>"
-# SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"   # só caminhos service-role (oauth_tokens)
+# SUPABASE_JWT_SECRET="<jwt-secret-do-supabase>"       # local: `supabase status` mostra o JWT secret
+# SUPABASE_SERVICE_ROLE_KEY="<service-role-key>"        # só caminhos service-role (oauth_tokens)
+# DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:54322/postgres"  # Supabase local; prod via Hyperdrive
 #
 # Fase 4+ (Shopee):
 # SHOPEE_PARTNER_ID="<partner-id>"
